@@ -73,7 +73,7 @@ function playRound(humanChoice, computerChoice){
         message = ("You lose, Scissors beats paper");
         console.log(message);
         console.log("\n");
-        return true;
+        return false;
     }
     else if(humanChoice === "scissors" && computerChoice === "rock"){
         message = ("You lose, Rock beats Scissors");
@@ -110,6 +110,11 @@ function playGame(){
     let humanSelection = humanChoice;
     let computerSelection = getComputerChoice();
 
+    if(plays === 5){
+        plays = 0;
+        count = 0;
+    }
+
     wins = playRound(humanSelection,computerSelection);
     if(wins){
         count++
@@ -123,22 +128,20 @@ function playGame(){
 function calcScore(){
     if (plays === 5){
 
-    console.log(`You have won ${count} times`);
-    console.log("\n");
+        console.log(`You have won ${count} times`);
+        console.log("\n");
 
-    if(count >= 3){
-        console.log("Congratulations, You beat the computer");
-    }
-    else{
-        console.log("Ahh Shacks, You lost to a damn machine");
-    }
-    console.log("********************");
-    plays = 0;
-    count = 0;
+        if(count >= 3){
+            message = ("Congratulations, You beat the computer");
+            console.log("Congratulations, You beat the computer");
+        }
+        else{
+            message = ("Ahh Shacks, You lost to a damn machine");
+            console.log("Ahh Shacks, You lost to a damn machine");
+        }
+        console.log("********************");
     }
 }
-
-// playGame();
 
 
 
@@ -147,16 +150,18 @@ let humanChoice;
 const buttons = document.querySelectorAll("button");
 let container = document.querySelector(".container1");
 let results = document.querySelector("#results");
+let score = document.querySelector("#score");
+let total = document.querySelector("#total");
 
 buttons.forEach((button) => {
     button.addEventListener("click", () => {
         humanChoice = (button.id);
         console.log(humanChoice);
-        // let computerSelection = getComputerChoice();
-        // playRound(humanChoice, computerSelection);
         playGame();
 
         results.textContent = message;
+        score.textContent = count;
+        total.textContent = plays;
         container.appendChild(results);
     });
 });
