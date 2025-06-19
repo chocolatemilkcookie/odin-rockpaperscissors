@@ -102,17 +102,39 @@ function playRound(humanChoice, computerChoice){
 
 }
 
+let plays = 0;
+let count = 0;
+
 function playGame(){
-    let count = 0;
     let wins;
-    while (true) {
+    let humanSelection = humanChoice;
+    let computerSelection = getComputerChoice();
 
+    wins = playRound(humanSelection,computerSelection);
+    if(wins){
+        count++
+    }
 
-        let humanSelection = humanChoice;
-        let computerSelection = getComputerChoice();
-        //console.log(wins = playRound(humanSelection,computerSelection));
+    plays ++;
+    calcScore();
+    
+}
 
-        wins = playRound(humanSelection,computerSelection);
+function calcScore(){
+    if (plays === 5){
+
+    console.log(`You have won ${count} times`);
+    console.log("\n");
+
+    if(count >= 3){
+        console.log("Congratulations, You beat the computer");
+    }
+    else{
+        console.log("Ahh Shacks, You lost to a damn machine");
+    }
+    console.log("********************");
+    plays = 0;
+    count = 0;
     }
 }
 
@@ -130,10 +152,11 @@ buttons.forEach((button) => {
     button.addEventListener("click", () => {
         humanChoice = (button.id);
         console.log(humanChoice);
-        let computerSelection = getComputerChoice();
-        playRound(humanChoice, computerSelection);
+        // let computerSelection = getComputerChoice();
+        // playRound(humanChoice, computerSelection);
+        playGame();
+
         results.textContent = message;
-        console.log(`message is ${message}`);
         container.appendChild(results);
     });
 });
