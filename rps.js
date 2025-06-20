@@ -39,7 +39,7 @@ function getComputerChoice(){
 let message;
 
 function playRound(humanChoice, computerChoice){
-
+    draw = false;
 
     if(humanChoice === "rock" && computerChoice === "rock"){
         message = ("It is a tie, you both chose Rock");
@@ -77,14 +77,12 @@ function playRound(humanChoice, computerChoice){
         message = ("You lose, Scissors beats paper");
         console.log(message);
         console.log("\n");
-        computerWin = true;
         return false;
     }
     else if(humanChoice === "scissors" && computerChoice === "rock"){
         message = ("You lose, Rock beats Scissors");
         console.log(message);
         console.log("\n");
-        computerWin = true;
         return false;
     }
     else if(humanChoice === "scissors" && computerChoice === "paper"){
@@ -114,9 +112,6 @@ let count = 0;
 let compWin = 0;
 
 function playGame(){
-    let wins;
-    let humanSelection = humanChoice;
-    let computerSelection = getComputerChoice();
 
     if(gameOver){
         plays = 0;
@@ -124,6 +119,10 @@ function playGame(){
         compWin = 0;
         gameOver = false;
     }
+
+    let wins;
+    let humanSelection = humanChoice;
+    let computerSelection = getComputerChoice();
 
     wins = playRound(humanSelection,computerSelection);
     if(wins){
@@ -133,8 +132,6 @@ function playGame(){
         compWin++
     }
 
-
-
     plays ++;
     calcScore();
     
@@ -142,8 +139,8 @@ function playGame(){
 
 function calcScore(){
 
-        console.log(`You have won ${count} times`);
-        console.log("\n");
+        // console.log(`You have won ${count} times`);
+        // console.log("\n");
 
         if(count >= 5){
             message = ("Congratulations, You beat the computer");
@@ -181,7 +178,3 @@ buttons.forEach((button) => {
         container.appendChild(results);
     });
 });
-
-
-
-
